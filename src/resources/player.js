@@ -32,20 +32,18 @@ function getPlaylist() {
     });
 }
 
-
 var lastVideos = [];
-var playerSelector = '#player';
 
 function isShuffle() {
-    return shuffle = $(".play-mode.shuffle").attr('value');
+    return shuffle = $("#play_modes li.shuffle").attr('value');
 }
 
 function isRepeat() {
-    return repeat = $(".play-mode.repeat").attr('value');
+    return repeat = $("#play_modes li.repeat").attr('value');
 }
 
 function getPlayerState() {
-    return $(playerSelector).tubeplayer('data').state;        
+    return $('#player').tubeplayer('data').state;
 }
 
 function getCurrentPlaying() {
@@ -61,7 +59,7 @@ function playerPlay() {
         }
     }
     
-    $(playerSelector).tubeplayer('play', id);
+    $('#player').tubeplayer('play', id);
     
     $('li.video').removeClass('playing').filter('[id="' + id + '"]').addClass('playing');
     
@@ -71,8 +69,6 @@ function playerPlay() {
     //title = (title.length < 80 ? title : title.substr(0, 80) + "...");
     //$('#video-title').html(title);
     
-    //scrollToVideo();
-
     if (isShuffle()) {
         lastVideos.push(id);
     }
@@ -81,16 +77,14 @@ function playerPlay() {
 }
 
 function playerPause() {
-    $(playerSelector).tubeplayer("pause");
+    $('#player').tubeplayer("pause");
 }
 
 function playerStop() {
-    $(playerSelector).tubeplayer("stop");
+    $('#player').tubeplayer("stop");
 }
 
 function playerNext() {
-    debugger;
-    
     var next;
     
     if ($("li.video").length > 0 && $("li.video").length == $("li.video.played").length) {
@@ -149,20 +143,6 @@ function removeVideo(id) {
     if (video) {
         if (id == getCurrentPlaying())
             playerNext();
-    }
-}
-
-function scrollToVideo() {
-    var id = getCurrentPlaying();
-    
-    if (id) {
-        var container = $('#playlist-container');
-        var video = $("li.video").filter('[id="' + id + '"]');    
-        var offset = video.offset().top - container.offset().top + container.scrollTop() - 1;
-        
-        $('#playlist-container').animate({
-            scrollTop: offset
-        }, 500);
     }
 }
 
@@ -271,12 +251,12 @@ function loadVideoDetails(item, id) {
 }
 
 $(document).ready(function() {
-    $(playerSelector).tubeplayer({
+    $('#player').tubeplayer({
         playerID: 'youtube-player', // the ID of the embedded youtube player
         width: 640, // the width of the player
         height: 480, // the height of the player
         allowFullScreen: 'true', // true by default, allow user to go full screen
-        initialVideo: 'HPPj6viIBmU', // the video that is loaded into the player
+        initialVideo: '', // the video that is loaded into the player
         start: 0,
         preferredQuality: 'hd720',// preferred quality: default, small, medium, large, hd720
         showControls: 1, // whether the player should have the controls visible, 0 or 1
@@ -285,7 +265,7 @@ $(document).ready(function() {
         autoHide: false,
         theme: 'dark', // possible options: "dark" or "light"
         color: 'white', // possible options: "red" or "white"
-        showinfo: false, // if you want the player to include details about the video
+        showinfo: true, // if you want the player to include details about the video
         modestbranding: true, // specify to include/exclude the YouTube watermark
         // flash
         wmode: 'transparent', // note: transparent maintains z-index, but disables GPU acceleration
@@ -309,13 +289,13 @@ $(document).ready(function() {
         onPlayerCued: function(){}, // when the player returns a state of cued
         onQualityChange: function(quality){}, // a function callback for when the quality of a video is determined
         // error events
-        onErrorNotFound: function(){ /*var id = youtubeExtractId($(playerSelector).tubeplayer('data').videoURL);*/ playerNext(); /*removeVideo(id);*/ }, // if a video cant be found
-        onErrorNotEmbeddable: function(){ /*var id = youtubeExtractId($(playerSelector).tubeplayer('data').videoURL);*/ playerNext(); /*removeVideo(id);*/ }, // if a video isnt embeddable
+        onErrorNotFound: function(){ /*var id = youtubeExtractId($('#player').tubeplayer('data').videoURL);*/ playerNext(); /*removeVideo(id);*/ }, // if a video cant be found
+        onErrorNotEmbeddable: function(){ /*var id = youtubeExtractId($('#player').tubeplayer('data').videoURL);*/ playerNext(); /*removeVideo(id);*/ }, // if a video isnt embeddable
         onErrorInvalidParameter: function(){} // if we've got an invalid param
     });
 
     $.tubeplayer.defaults.afterReady = function($player) {
-        $(playerSelector).removeClass('loading');
+        $('#player').removeClass('loading');
         playerPlay();
     }
     
@@ -326,24 +306,24 @@ $(document).ready(function() {
     });
     
     /* Controls */    
-    $('li.control.play').live('click', function() {
+    $('#play_controls li.play').live('click', function() {
         playerPlay();
     });
-    $('li.control.pause').live('click', function() {
+    $('#play_controls li.pause').live('click', function() {
         playerPause();
     });
-    $('li.control.stop').live('click', function() {
+    $('#play_controls li.stop').live('click', function() {
         playerStop();
     });
-    $('li.control.prev').live('click', function() {
+    $('#play_controls li.prev').live('click', function() {
         playerPrev();
     });
-    $('li.control.next').live('click', function() {
+    $('#play_controls li.next').live('click', function() {
         playerNext();
     });
 
     /* Play Mode */
-    $("a.shuffle").toggle(function(){
+    $("#play_modes li.shuffle").toggle(function(){
         $(this).removeClass('off').addClass('on');
         $(this).attr('value', '1');
         lastVideos = [];
@@ -353,7 +333,7 @@ $(document).ready(function() {
         $(this).removeClass('on').addClass('off');
         $(this).attr('value', '0');            
     }); 
-    $("a.repeat").toggle(function(){
+    $("#play_modes li.repeat").toggle(function(){
         $(this).removeClass('off').addClass('on');
         $(this).attr('value', '1');
     }, function () {
