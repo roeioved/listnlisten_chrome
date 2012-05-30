@@ -1,0 +1,25 @@
+a.listnlisten_thumb_add {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    padding: 0;
+    width: 22px;
+    height: 22px;    
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    display: block;
+    cursor: pointer;
+    text-shadow: 0 1px 0 #fff;
+    border-color: #ccc #ccc #aaa;
+    box-shadow: inset 0 0 1px #fff;
+    background-color: #e0e0e0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 22px;
+    color: #666;
+}
+a.listnlisten_thumb_add:hover {
+    color: #666;
+    text-decoration: none;
+}

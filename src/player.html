@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>
+    <title>List {n} Listen</title>
+
+    <link href="style/reset.css" rel="stylesheet" type="text/css" />
+    <link href="style/player.css" rel="stylesheet" type="text/css" />
+    <link href="style/style.css" rel="stylesheet" type="text/css" />
+
+    <script src="resources/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="resources/jquery.jqtubeutil.min.js" type="text/javascript"></script>
+    <script src="resources/jquery.tubeplayer.min.js" type="text/javascript"></script>
+    <script src="resources/underscore.min.js" type="text/javascript"></script>
+    <script src="resources/playlist.js" type="text/javascript"></script>
+    <script src="resources/player.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getPlaylist();
+        });
+        
+        chrome.extension.onRequest.addListener(
+            function (request, sender, sendResponse) {
+                handleRequest(request, sendResponse);
+            }
+        );
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <div id="page-content">
+            <div id="main-container">
+                <div id="sky" class="stage"></div>
+                <div id="clouds" class="stage"></div>
+                <div id="hill" class="stage"></div>
+                
+                <div id="player-container">
+                    <div class="now-playing">
+                        <span id="video-title"></span>
+                    </div>
+                    
+                    <div id="player" class="loading flex-video"></div>
+                    
+                    <div id="play-actions">
+                        <ul>
+                        <!--<li class="control play" title="Play"></li>-->
+                        <!--<li class="control pause" title="Pause"></li>-->
+                        <!--<li class="control stop" title="Stop"></li>-->
+                        <li class="control prev" title="Previous"></li>
+                        <li class="control next" title="Next"></li>
+                        </ul>
+                    </div>
+                    
+                    <div id="play-mode">
+                        <a href="#" class="play-mode shuffle off" title="Toggle Shuffle" value="0">&nbsp;</a>
+                        <a href="#" class="play-mode repeat off" title="Toggle Repeat" value="0">&nbsp;</a>	    
+                    </div>
+                </div>
+            </div>
+            <div class="clearboth"></div>
+            
+            <ul id="playlist"></ul>    
+            <a href="#" onclick="clearPlaylist()">Clear</a>
+        </div>
+    </div>
+</body>
+
+</html>

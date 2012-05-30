@@ -1,0 +1,181 @@
+/*
+ dark      #222930
+ light     #E9E9E9
+ turquoise #4EB1BA
+*/
+
+/* ======================================================= */
+/*                      Global Reset                       */
+/* ======================================================= */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+footer, header, section {
+    display: block;
+}
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+/* tables still need cellspacing="0" in the markup */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+input, select {
+    vertical-align: middle;
+}
+/* ======================================================= */
+/*                       Base Style                        */
+/* ======================================================= */
+/* Basic typography
+---------------------------------------------------------- */
+body {
+    font-family: "Lucida Sans Unicode", "Lucida Sans", "Lucida Grande", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    color: #333;
+    unicode-bidi: embed;    
+}
+strong, th, thead td {
+    font-weight: bold;
+}
+small {
+    font-size: 85%;
+}
+/* Basic size
+---------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.6em;
+    font-weight: normal;
+    line-height: 1em;
+    color: #4b7eff;
+}
+h1 {
+    font-size: 36px;
+}
+h2 {
+    font-size: 30px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 18px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 12px;
+}
+/* Basic lists
+---------------------------------------------------------- */
+ul {
+    margin-right: 1.5em;
+    list-style-type: disc;
+}
+ul li {
+    margin-right: .85em;
+}
+ul ul {
+    list-style-type: square;
+}
+ul ul ul {
+    list-style-type: circle;
+}
+ol {
+    margin-right: 2.35em;
+    list-style-position: outside;
+    list-style-type: decimal;
+}
+dt {
+    margin-top: .8em;
+    margin-bottom: .4em;
+    font-weight: bold;
+}
+ol ol, ul ol {
+    margin-left: 2.5em;
+}
+ul ol, ol ul, ol ol, ul ul {
+    margin-bottom: 0;
+}
+/* Link style
+---------------------------------------------------------- */
+a:link, a:visited, a:hover, a:active, a:focus {
+    color: #4b7eff;
+    outline: 0 none;
+    text-decoration: none;
+}
+a:hover {
+    color: #4b7eff; /*262626*/
+    text-decoration: none;
+}
+.button {
+    font-weight: normal;
+    font-size: 12px;
+    color: gray;
+    background: url(../images/button.png) right no-repeat;
+    display: inline-block;
+    min-width: 40px;
+    height: 32px;
+    text-align: center;
+    padding: 12px 4px 0px 0px;
+    margin: 0px 0px 0px 18px;
+}
+a.button {
+    color: #262626;    
+}
+a.button:hover {
+    color: #4b7eff;    
+}
+.button-right {
+    background: url(../images/button-left.png) no-repeat left;
+    float: left;
+    width: 5px;
+    height: 32px;
+    margin: -6px 0px 0px -5px;
+}
+.button-text {
+    margin: 0 6px 0 6px;
+}
+/* Non-semantic helper classes
+---------------------------------------------------------- */
+.center {
+    text-align: center;
+}
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+.invisible {
+    visibility: hidden;
+}
+.alignright {
+    float: right;
+}
+.alignleft {
+    float: left;
+}
+.aligncenter {
+    margin-right:auto;
+    margin-left:auto;
+}
+.clearboth{
+    clear: both;
+    display: block;
+    font-size: 0px;
+    height: 0px;
+    line-height: 0;
+    width: 100%;
+    overflow:hidden;
+}
