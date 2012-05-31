@@ -11,7 +11,7 @@ function handleRequest(request, sendResponse) {
         if (playlist.addVideo(video)) {
             var item = videoItem(video.id, video.title);
             $('#playlist').append(item);
-
+            
             var player_state = getPlayerState();
             var num_of_videos = $("li.video").length;
             if (num_of_videos == 1 || player_state == -1) {

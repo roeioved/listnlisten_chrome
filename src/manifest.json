@@ -1,6 +1,6 @@
 {
     "name": "List {n} Listen",
-    "version":"0.1",
+    "version":"0.1.2",
     "options_page": "preferences.html",
     "description": "",
     "icons": {"16": "images/icon_16.png", "32":"images/icon_32.png", "48": "images/icon_48.png", "128": "images/icon_128.png"},

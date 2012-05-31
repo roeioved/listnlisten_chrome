@@ -119,6 +119,24 @@
     <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
 
     <script type="text/javascript">
+        function onFollow(user) {
+            FOLLOW = user;
+                
+            if (FOLLOW && CHANNEL) {
+                subscribe(FOLLOW, onReceive, onConnect, onDisconnect);
+                
+                $('#player_actions').hide();
+                $('#playlist_container').hide();
+            }
+        }
+        function onUnfollow(user) {
+            unsubscribe(FOLLOW);
+            FOLLOW = null;
+            
+            $('#player_actions').show();
+            $('#playlist_container').show();            
+        }
+        
         function onReceive(message) {
             console.log(message);
             
@@ -154,11 +172,7 @@
             $('#follow_button').click(function() {
                 var f = $('#follow_name').val();
                 if (f && f.length > 0)
-                    FOLLOW = f;
-                    
-                if (FOLLOW && CHANNEL) {
-                    subscribe(FOLLOW, onReceive, onConnect, onDisconnect);
-                }
+                    onFollow(f);
             });
             
             $('#unfollow_button').click(function() {
@@ -166,9 +180,7 @@
                 
                 if (FOLLOW) {
                     onDisconnect();
-                    
-                    unsubscribe(FOLLOW);
-                    FOLLOW = null;
+                    onUnfollow();
                 }
             });
         });
