@@ -5,8 +5,8 @@ chrome.extension.onRequest.addListener(
         console.log(request);
 
         if (request.op == 'addVideo') {
-            var id = request.id;
-            playlist.addVideo(id);
+            var video = new Video(request.id, request.title, request.duration);
+            playlist.addVideo(video);
         }
         else if (request.op == 'removeVideo') {
             var id = request.id;

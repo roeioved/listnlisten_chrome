@@ -1,21 +1,11 @@
-function Video(id) {
+function Video(id, title, duration) {
     this.id = id;
-    
-    this._load();
+    this.title = title;
+    this.duration = duration;
 }
 
 Video.prototype = {
-    
-    _load: function() {
-        jQTubeUtil.video(this.id, function(response) {
-            if (response && response.videos && response.videos.length == 1) {
-                var video = response.videos[0];
-                this.title = video.title;
-                this.duration = video.duration;
-            }
-        });
-    }
-    
+
 }
 
 function Playlist() {
@@ -28,16 +18,14 @@ Playlist.prototype = {
         return this._videos;
     },
     
-    addVideo: function (id) {
+    addVideo: function (video) {
         var videos = this._videos;
         for (var idx in videos) {
-            if (videos[idx].id == id)
-                return null;
+            if (videos[idx].id == video.id)
+                return false;
         }
-
-        var video = new Video(id);
         this._videos.push(video);
-        return video;
+        return true;
     },
 
     removeVideo: function (id) {

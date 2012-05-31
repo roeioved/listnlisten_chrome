@@ -156,78 +156,64 @@ body {
 #playlist_container {
     position: relative;
     margin: 0;
+    margin-bottom: 40px;
 }
+
+/* Actions
+---------------------------------------------------------- */
+#playlist_actions {
+    float: right;
+    height: 48px;
+    margin: 0;
+}
+#playlist_actions li {
+    float: left;
+    background-image: url(../images/playlist_actions.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+}
+#playlist_actions li:hover {
+    cursor: pointer;
+}
+#playlist_actions li.clear { background-position: top left !important; }
+#playlist_actions li.clear:hover { background-position: bottom left !important; }
 
 /* Videos
 ---------------------------------------------------------- */
 #playlist {
+    list-style-type: decimal-leading-zero;
     margin: 0;
-    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    box-shadow: 0 2px 4px #222;
+    padding: 10px;
 }
 li.video {
+    list-style-type: decimal-leading-zero;
     position: relative;
     display: block;
-    list-style-type: none;
-    padding: 3px;
+    padding: 4px 4px 4px 10px;
+    text-align: left;
     margin: 0;
-    height: 36px;
-    border-bottom: solid 1px #ddd;
-}
-li.video.playing {
-    background-color: #ccc;
+    font-size: 13px;
+    color: #000;
+    border-bottom: 1px solid #eee;
 }
 li.video:first-child {
-    border-top: solid 1px #999;
+    border-radius: 7px 7px 0 0;
+}
+li.video:last-child {
+    border-radius: 0 0 7px 7px;
+}
+li.video.playing {
+    background-color: #ffcd28;
 }
 li.video:hover {
-    /*
-    opacity: 0.7;
-    filter: alpha(opacity=70);
-    */
-    background-color: #e3e3e3;
-}
-li.video .preview {
-    position: absolute;
-}
-li.video .preview img {
-    width: 50px;
-    height: 30px;
-    padding: 2px;
-    border: #ccc solid 1px;
-    background-color: white;
-    cursor: pointer;
-}
-li.video .info {
-    position: absolute;
-    left: 63px;
-    overflow: hidden;
-}
-li.video .title {
-    font-size: 13px;
-    white-space: nowrap;
-    color: #4b7eff;
-    display: inline-block;
-}
-li.video .title a {
-    color: #4b7eff;
-}
-li.video .stats {
-    font-size: 9px;
-    float: left;
-}
-li.video .stats span {
-    padding-left: 14px;
-}
-li.video .info .time {
-    background: url(../images/time.png) no-repeat left center;
-}
-li.video .info .views {
-    background: url(../images/views.png) no-repeat left center;
-    margin-left: 6px;
-}
-li.video .info .date {
-    background: url(../images/date.png) no-repeat left center;
-    margin-left: 6px;
+    background-color: #eee;
 }
 
 /* Actions
