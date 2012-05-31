@@ -10,6 +10,17 @@ body {
     width: 100%;
 }
 
+.wrap {
+    position: relative;
+    z-index: 100;
+    width: 75%;
+    min-width: 480px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+
 /* Animation
 ---------------------------------------------------------- */
 .stage {
@@ -38,27 +49,9 @@ body {
 /* ======================================================= */
 #player_container {
     position: relative;
-    z-index: 100;
-    margin-top: 60px;
-    width: 75%;
-    min-width: 480px;
     min-height: 320px;
-    max-width: 640px;
     max-height: 480px;
-    margin-left: auto;
-    margin-right: auto;
 }
-
-#playlist_container {
-    position: relative;
-    z-index: 100;
-    width: 75%;
-    min-width: 480px;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 
 #player {
     background: #000;
@@ -92,9 +85,82 @@ body {
     height: 100%;
 }
 
+/* Player Actions
+---------------------------------------------------------- */
+#player_actions {
+    position: relative;
+    height: 48px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Play Mode
+---------------------------------------------------------- */
+#play_modes {
+    float: right;
+    height: 48px;
+    margin: 0;
+}
+#play_modes li {
+    float: left;
+    background-image: url(../images/play_modes.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+}
+#play_modes li:hover {
+    cursor: pointer;
+}
+#play_modes li.shuffle.off { background-position: top right !important; }
+#play_modes li.shuffle.on, li.shuffle:hover { background-position: bottom right !important; }
+#play_modes li.repeat.off { background-position: top left !important; }
+#play_modes li.repeat.on, li.repeat:hover { background-position: bottom left !important; }
+
+/* Controls
+---------------------------------------------------------- */
+#play_controls {
+    float: left;
+    height: 48px;
+    margin: 0;
+}
+#play_controls li.control {
+    display: block;
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    list-style-type: none;
+    background-image: url(../images/controls.png);
+    background-repeat: no-repeat;
+}
+#play_controls li.control:hover {
+    cursor: pointer;
+}
+#play_controls li.control.play {background-position: 0 top;}
+#play_controls li.control.play:hover {background-position: 0 bottom;}
+#play_controls li.control.stop {background-position: 25% top;}
+#play_controls li.control.stop:hover {background-position: 25% bottom;}
+#play_controls li.control.pause {background-position: 50% top;}
+#play_controls li.control.pause:hover {background-position: 50% bottom;}
+#play_controls li.control.prev {background-position: 75% top;}
+#play_controls li.control.prev:hover {background-position: 75% bottom;}
+#play_controls li.control.next {background-position: 100% top;}
+#play_controls li.control.next:hover {background-position: 100% bottom;}
+
+/* ======================================================= */
+/*                        Playlist                         */
+/* ======================================================= */
+
+#playlist_container {
+    position: relative;
+    margin: 0;
+}
+
 /* Videos
 ---------------------------------------------------------- */
-ul.videos-list {
+#playlist {
     margin: 0;
     padding: 0;
 }
@@ -146,7 +212,7 @@ li.video .title a {
     color: #4b7eff;
 }
 li.video .stats {
-    font-size: 9px;    
+    font-size: 9px;
     float: left;
 }
 li.video .stats span {
@@ -163,64 +229,6 @@ li.video .info .date {
     background: url(../images/date.png) no-repeat left center;
     margin-left: 6px;
 }
-
-/* Play Mode
----------------------------------------------------------- */
-#play_modes {
-    position: absolute;    
-    height: 48px;
-    right: 0;
-    bottom: -60px;
-}
-#play_modes li {
-    float: left;
-    background-image: url(../images/play_modes.png);
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 48px;
-    height: 48px;
-    margin: 0;
-}
-#play_modes li:hover {
-    cursor: pointer;
-}
-#play_modes li.shuffle.off { background-position: top right !important; }
-#play_modes li.shuffle.on, li.shuffle:hover { background-position: bottom right !important; }
-#play_modes li.repeat.off { background-position: top left !important; }
-#play_modes li.repeat.on, li.repeat:hover { background-position: bottom left !important; }
-
-/* Controls
----------------------------------------------------------- */
-#play_controls {
-    position: absolute;    
-    height: 48px;
-    left: 0;
-    bottom: -60px;
-    margin: 0;
-}
-#play_controls li.control {
-    display: block;
-    float: left;
-    width: 48px;
-    height: 48px;
-    margin: 0;
-    list-style-type: none;
-    background-image: url(../images/controls.png);
-    background-repeat: no-repeat;
-}
-#play_controls li.control:hover {
-    cursor: pointer;
-}
-#play_controls li.control.play {background-position: 0 top;}
-#play_controls li.control.play:hover {background-position: 0 bottom;}
-#play_controls li.control.stop {background-position: 25% top;}
-#play_controls li.control.stop:hover {background-position: 25% bottom;}
-#play_controls li.control.pause {background-position: 50% top;}
-#play_controls li.control.pause:hover {background-position: 50% bottom;}
-#play_controls li.control.prev {background-position: 75% top;}
-#play_controls li.control.prev:hover {background-position: 75% bottom;}
-#play_controls li.control.next {background-position: 100% top;}
-#play_controls li.control.next:hover {background-position: 100% bottom;}
 
 /* Actions
 ---------------------------------------------------------- */

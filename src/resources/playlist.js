@@ -29,11 +29,28 @@ Playlist.prototype = {
     },
     
     addVideo: function (id) {
+        var videos = this._videos;
+        for (var idx in videos) {
+            if (videos[idx].id == id)
+                return null;
+        }
+
         var video = new Video(id);
         this._videos.push(video);
         return video;
     },
-    
+
+    removeVideo: function (id) {
+        var videos = this._videos;
+        for (var idx in videos) {
+            if (videos[idx].id == id) {
+                videos.splice(idx, 1);
+                return true;
+            }
+        }
+        return false;
+    },
+
     clear: function () {
         this._videos = [];
     }

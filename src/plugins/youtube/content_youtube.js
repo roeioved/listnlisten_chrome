@@ -19,11 +19,13 @@ $('.ux-thumb-wrap').hover(
     function() { $(this).children(".listnlisten_thumb_add").hide(); }
 );
 
-$('.listnlisten_thumb_add').live('click', function() {
+$('.listnlisten_thumb_add').live('click', function(e) {
+    e.preventDefault();
+
     var url = $(this).parent().attr('href');
     var id = youtubeExtractId(url);
     
     if (id) {
         addVideo(id);
-    }    
+    }
 });

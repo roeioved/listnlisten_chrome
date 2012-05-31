@@ -1,14 +1,22 @@
 var playlist = new Playlist();
 
-function handleRequest(request, sendResponse) {
+function handleRequest(request, sender, sendResponse) {
     if (request.op == 'addVideo') {
         var id = request.id;
         var video = playlist.addVideo(id);
-        $('#playlist').append('<li class="video" id="' + video.id + '">' + video.id + ' => ' + video.title + '</li>');
+        if (video) {
+            $('#playlist').append('<li class="video" id="' + video.id + '">' + video.id + '</li>');
+        }
+    }
+    else if (request.op == 'removeVideo') {
+        var id = request.id;
+        if (playlist.removeVideo(id)) {
+             $("li.video").filter('[id="' + id + '"]').remove();
+        }
     }
     else if (request.op == 'clearPlaylist') {
         playlist.clear();
-        $('#playlist').html();
+        $('#playlist').empty();
     }
 }
 
@@ -27,6 +35,7 @@ function getPlaylist() {
             for (var idx in videos) {
                 var video = videos[idx];
                 playlist.addVideo(video.id);
+                $('#playlist').append('<li class="video" id="' + video.id + '">' + video.id + ' => ' + video.title + '</li>');
             }
         }
     });

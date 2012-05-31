@@ -29,10 +29,9 @@
     ],
     "browser_action": {
         "default_icon": "images/icon_32.png",
-        "default_title": "List {n} Listen",
-        "default_popup": "popup.html"
+        "default_title": "List {n} Listen"
     },
     "permissions": [
-        "tabs", "<all_urls>"
+        "tabs"
     ]
 }
