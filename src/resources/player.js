@@ -1,10 +1,16 @@
 var playlist = new Playlist();
 
+function videoItem(id, title) {
+    //return "<li class='video' id='" + id + "'>" + title + "<span class='actions delete'></span><span class='actions like'></span>" + "</li>";
+    return "<li class='video' id='" + id + "'>" + title + "<span class='actions delete'></span>" + "</li>";
+}
+
 function handleRequest(request, sendResponse) {
     if (request.op == 'addVideo') {
         var video = new Video(request.id, request.title, request.duration);
         if (playlist.addVideo(video)) {
-            $('#playlist').append('<li class="video" id="' + video.id + '">' + video.title + '</li>');
+            var item = videoItem(video.id, video.title);
+            $('#playlist').append(item);
 
             var player_state = getPlayerState();
             var num_of_videos = $("li.video").length;
@@ -13,10 +19,25 @@ function handleRequest(request, sendResponse) {
             }
         }
     }
-    else if (request.op == 'removeVideo') {
-        var id = request.id;
-        if (playlist.removeVideo(id)) {
-             $("li.video").filter('[id="' + id + '"]').remove();
+}
+
+function removeVideo(id) {
+    var request = { op: 'removeVideo', id: id };
+    chrome.extension.sendRequest(request);
+
+    if (playlist.removeVideo(id)) {
+        var video = $("li.video").filter('[id="' + id + '"]');
+
+        if (video) {
+            if (id == getCurrentPlaying()) {
+                var num_of_videos = $("li.video").length;
+                if (num_of_videos == 1)
+                    initVideo();
+                else
+                    playerNext();
+            }
+
+            $("li.video").filter('[id="' + id + '"]').remove();
         }
     }
 }
@@ -27,7 +48,11 @@ function clearPlaylist() {
 
     playlist.clear();
     $('#playlist').empty();
-    $('#player').tubeplayer('stop');
+    initVideo();
+}
+
+function initVideo() {
+    $('#player').tubeplayer('play', '?');
 }
 
 function getPlaylist() {
@@ -40,7 +65,8 @@ function getPlaylist() {
             for (var idx in videos) {
                 var video = videos[idx];
                 playlist.addVideo(video);
-                $('#playlist').append('<li class="video" id="' + video.id + '">' + video.title + '</li>');
+                var item = videoItem(video.id, video.title);
+                $('#playlist').append(item);
             }
         }
     });
@@ -147,15 +173,6 @@ function playByID(id) {
     playerPlay();
 }
 
-function removeVideo(id) {
-    var video = $("li.video").filter('[id="' + id + '"]');
-    
-    if (video) {
-        if (id == getCurrentPlaying())
-            playerNext();
-    }
-}
-
 $(document).ready(function() {
     $('#player').tubeplayer({
         playerID: 'youtube-player', // the ID of the embedded youtube player
@@ -250,5 +267,24 @@ $(document).ready(function() {
     /* Playlist Actions */
     $('#playlist_actions li.clear').live('click', function() {
         clearPlaylist();
+    });
+
+    /* Video Actions */
+    $("li.video").live({
+        mouseenter: function() {
+            $(this).find('.actions').show();
+        },
+        mouseleave: function() {
+            $(this).find('.actions').hide();
+        }
+    });
+    $('li.video .like').live('click', function() {
+        var id = $(this).parents('li').filter(':first').attr('id');
+        return false;
+    });
+    $('li.video .delete').live('click', function() {
+        var id = $(this).parents('li').filter(':first').attr('id');
+        removeVideo(id);
+        return false;
     });
 });

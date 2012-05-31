@@ -61,7 +61,7 @@ body {
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.5);
 }
 #player.loading {
-    background: #000 url(../images/loading-big.gif) no-repeat center;
+    background: #000 url(../images/loading.gif) no-repeat center;
 }
 
 /* Flex Video (http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video)
@@ -222,24 +222,17 @@ li.video:hover {
 /* Actions
 ---------------------------------------------------------- */
 li.video .actions {
-    position: absolute;
-    z-index: 100;
-    right: 5px;
-    top: 5px;
-}
-li.video .actions span {
+    float: right;
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
-    float: left;
     margin-left: 5px;
     cursor: pointer;
     display: none;
+    opacity: 0.7;
 }
-li.video .actions .like       {background-image: url(../images/icon_like_off.png);}
-li.video .actions .like.selected,
-li.video .actions .like.on    {background-image: url(../images/icon_like_on.png);}
-li.video .actions .edit       {background-image: url(../images/icon_edit_off.png);}
-li.video .actions .edit.on    {background-image: url(../images/icon_edit_on.png);}
-li.video .actions .delete     {background-image: url(../images/icon_delete_off.png);}
-li.video .actions .delete.on  {background-image: url(../images/icon_delete_on.png);}
+li.video .actions:hover {
+    opacity: 1;
+}
+li.video .like   { background-image: url(../images/icon_like.png); }
+li.video .delete { background-image: url(../images/icon_delete.png); }
