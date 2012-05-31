@@ -33,7 +33,7 @@ function openPlayerTab() {
                 chrome.tabs.update(tab.id, {selected: true});
             }
         } else {
-            chrome.tabs.create( {url:'player.html'}, function(tab) {
+            chrome.tabs.create( {url: 'player.html'}, function(tab) {
                 if (tab) {
                     //todo:store tab id
                 }

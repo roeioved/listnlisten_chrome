@@ -236,3 +236,22 @@ li.video .actions:hover {
 }
 li.video .like   { background-image: url(../images/icon_like.png); }
 li.video .delete { background-image: url(../images/icon_delete.png); }
+
+/* ======================================================= */
+/*                        Broadcast                        */
+/* ======================================================= */
+
+#broadcast {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    padding: 10px;
+    width: 360px;
+    height: 55px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    color: black;
+    font-size: 13px;
+    z-index: 9999;
+}

@@ -13,10 +13,14 @@
     <script src="resources/jquery.spritely-0.6.1.js" type="text/javascript"></script>
     <script src="resources/jquery.random.min.js" type="text/javascript"></script>
     <script src="resources/underscore.min.js" type="text/javascript"></script>
+    <script src="resources/pubnub.js" type="text/javascript"></script>
     <script src="resources/playlist.js" type="text/javascript"></script>
     <script src="resources/player.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+        var CHANNEL = null;
+        var FOLLOW = null;
+
         $(document).ready(function () {
             getPlaylist();
             
@@ -36,6 +40,11 @@
     <div id="sky" class="stage"></div>
     <div id="clouds" class="stage"></div>
     <div id="hill" class="stage"></div>
+
+    <div id="broadcast">
+        <p>Channel: <input id="channel_name" type="text"/> <input id="channel_button" type="button" value="Change"></p>
+        <p>Follow:  <input id="follow_name" type="text"/> <input id="follow_button" type="button" value="Follow"> <input id="unfollow_button" type="button" value="Un-Follow"></p>
+    </div>
 
     <div class="wrap">
         <div id="player_container">
@@ -81,6 +90,57 @@
         }
     </script>
     -->
+
+    <div pub-key="pub-75672b18-07a7-44d0-aa00-bb75053c22f8" sub-key="sub-62b90833-ab28-11e1-9710-b7d2577efd2c" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+    <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#channel_button').click(function() {
+                var c = $('#channel_name').val();
+                if (c && c.length > 0)
+                    CHANNEL = c;
+            });
+
+            $('#follow_button').click(function() {
+                var f = $('#follow_name').val();
+                if (f && f.length > 0)
+                    FOLLOW = f;
+
+                if (FOLLOW && CHANNEL) {
+                    subscribe(FOLLOW,
+                            function(message) {
+                                console.log(message);
+
+                                if (message.op == "stop") {
+                                    $('#player').tubeplayer("stop");
+                                }
+                                else if (message.op == "pause") {
+                                    $('#player').tubeplayer("pause");
+                                }
+                                else if (message.op == "play") {
+                                    $('#player').tubeplayer("play", message.id);
+                                }
+                            },
+                            function() {
+                                var action = { sender: CHANNEL, op: 'follow' };
+                                publish(CHANNEL, action);
+                            }
+                    );
+                }
+            });
+
+            $('#unfollow_button').click(function() {
+                $('#follow_name').val('');
+
+                if (FOLLOW) {
+                    unsubscribe(FOLLOW);
+                    FOLLOW = null;
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

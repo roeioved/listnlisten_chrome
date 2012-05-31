@@ -197,9 +197,24 @@ $(document).ready(function() {
         // html5
         iframed: true, // iframed can be: true, false; if true, but not supported, degrades to flash
         // player events
-        onPlay: function(id){}, // after the play method is called
-        onPause: function(){}, // after the pause method is called
-        onStop: function(){}, // after the player is stopped
+        onPlay: function(id) {
+            if (CHANNEL) {
+                var action = { sender: CHANNEL, op: 'play', id: id };
+                publish(CHANNEL, action);
+            }
+        }, // after the play method is called
+        onPause: function() {
+            if (CHANNEL) {
+                var action = { sender: CHANNEL, op: 'pause' };
+                publish(CHANNEL, action);
+            }
+        }, // after the pause method is called
+        onStop: function() {
+            if (CHANNEL) {
+                var action = { sender: CHANNEL, op: 'stop' };
+                publish(CHANNEL, action);
+            }
+        }, // after the player is stopped
         onSeek: function(time){}, // after the video has been seeked to a defined point
         onMute: function(){}, // after the player is muted
         onUnMute: function(){}, // after the player is unmuted
