@@ -203,6 +203,9 @@ li.video {
     color: #000;
     border-bottom: 1px solid #eee;
 }
+li.video:last-child {
+    border-bottom: 0;
+}
 li.video:first-child {
     border-radius: 7px 7px 0 0;
 }

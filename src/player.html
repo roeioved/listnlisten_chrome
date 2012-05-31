@@ -61,6 +61,26 @@
             <ul id="playlist"></ul>
         </div>
     </div>
+
+    <!--
+    <a target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=162003873930831&response_type=token&scope=&redirect_uri=http://www.facebook.com/connect/login_success.html">Facebook Connect</a>
+    <script>
+        console.log(localStorage);
+
+        if (localStorage.accessToken) {
+            var graphUrl = "https://graph.facebook.com/me?" + localStorage.accessToken + "&callback=displayUser";
+            console.log(graphUrl);
+
+            var script = document.createElement("script");
+            script.src = graphUrl;
+            document.body.appendChild(script);
+
+            function displayUser(user) {
+                console.log(user);
+            }
+        }
+    </script>
+    -->
 </body>
 
 </html>

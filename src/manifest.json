@@ -32,6 +32,7 @@
         "default_title": "List {n} Listen"
     },
     "permissions": [
-        "tabs"
+        "tabs",
+        "*.facebook.com/*"
     ]
 }

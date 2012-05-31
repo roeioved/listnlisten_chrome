@@ -5,6 +5,12 @@ function handleRequest(request, sendResponse) {
         var video = new Video(request.id, request.title, request.duration);
         if (playlist.addVideo(video)) {
             $('#playlist').append('<li class="video" id="' + video.id + '">' + video.title + '</li>');
+
+            var player_state = getPlayerState();
+            var num_of_videos = $("li.video").length;
+            if (num_of_videos == 1 || player_state == -1) {
+                playerPlay();
+            }
         }
     }
     else if (request.op == 'removeVideo') {
@@ -21,6 +27,7 @@ function clearPlaylist() {
 
     playlist.clear();
     $('#playlist').empty();
+    $('#player').tubeplayer('stop');
 }
 
 function getPlaylist() {
@@ -60,14 +67,15 @@ function getCurrentPlaying() {
 function playerPlay() {
     var id = getCurrentPlaying();
     
-    if(!id) {
-        if($("li.video").length > 0) {            
+    if (!id) {
+        if ($("li.video").length > 0) {
             id = $("li.video").first().attr('id');
         }
     }
     
     $('#player').tubeplayer('play', id);
-    
+    //$('#player').tubeplayer('play', { id: id, time: 100 } );
+
     $('li.video').removeClass('playing').filter('[id="' + id + '"]').addClass('playing');
     
     var video = $('li.video').filter('[id="' + id + '"]');

@@ -24,7 +24,7 @@ $('.ux-thumb-wrap').hover(
 $('.listnlisten_thumb_add').live('click', function(e) {
     e.preventDefault();
 
-    var url = $(this).parent().attr('href');
+    var url = $(this).parents('a:first').attr('href');
     var id = youtubeExtractId(url);
     
     if (id) {
@@ -36,12 +36,16 @@ $('.listnlisten_thumb_add').live('click', function(e) {
                 var duration = video.duration;
 
                 addVideo(id, title, duration);
+
+                isVideoRestricted(id, function(state) {
+                    console.log(title + ':' + state);
+                });
             }
         });
     }
 });
 
-function isVideoRestricted(id) {
+function isVideoRestricted(id, callback) {
     var url = "http://gdata.youtube.com/feeds/api/videos/" + id + "?format=5&alt=json";
 
     $.ajax({
@@ -54,20 +58,18 @@ function isVideoRestricted(id) {
 
             if (state == null)
                 state = true;
-            else
-            if (state.yt$state && state.yt$state.name && state.yt$state.name.length && state.yt$state.reasonCode != 'limitedSyndication')
+            else if (state.yt$state && state.yt$state.name && state.yt$state.name.length && state.yt$state.reasonCode != 'limitedSyndication')
                 state = false;
             else
                 state = true;
 
-            if(!state) {
-                // restricted?
-            } else {
-            }
+            callback(state);
         },
         error: function(jqXHR, textStatus, errorThrown) {
+            //todo
         },
         complete: function(jqXHR, textStatus) {
+            //todo
         }
     });
 }
