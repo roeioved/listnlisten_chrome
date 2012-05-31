@@ -198,19 +198,19 @@ $(document).ready(function() {
         iframed: true, // iframed can be: true, false; if true, but not supported, degrades to flash
         // player events
         onPlay: function(id) {
-            if (CHANNEL) {
+            if (CHANNEL && ON_AIR) {
                 var action = { sender: CHANNEL, op: 'play', id: id };
                 publish(CHANNEL, action);
             }
         }, // after the play method is called
         onPause: function() {
-            if (CHANNEL) {
+            if (CHANNEL && ON_AIR) {
                 var action = { sender: CHANNEL, op: 'pause' };
                 publish(CHANNEL, action);
             }
         }, // after the pause method is called
         onStop: function() {
-            if (CHANNEL) {
+            if (CHANNEL && ON_AIR) {
                 var action = { sender: CHANNEL, op: 'stop' };
                 publish(CHANNEL, action);
             }

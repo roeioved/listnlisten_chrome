@@ -18,7 +18,7 @@ body {
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 60px;
+    margin-top: 80px;
 }
 
 /* Animation
@@ -246,6 +246,21 @@ li.video .delete { background-image: url(../images/icon_delete.png); }
     left: 20px;
     top: 20px;
     padding: 10px;
+    width: 355px;
+    height: 27px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    color: black;
+    font-size: 13px;
+    z-index: 9999;
+}
+
+#on_air {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    padding: 10px;
     width: 360px;
     height: 55px;
     background: white;
@@ -254,4 +269,43 @@ li.video .delete { background-image: url(../images/icon_delete.png); }
     color: black;
     font-size: 13px;
     z-index: 9999;
+}
+
+/* ======================================================= */
+/*                        User Data                        */
+/* ======================================================= */
+
+#userdata {
+    position: fixed;
+    top: 0;
+    right: 40px;
+    background: #111;
+    border: 1px solid #000;
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    width: 180px;
+    height: 32px;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+}
+#userdata a, #userdata a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.avatar {
+    position: absolute;
+    width: 80px;
+    height: 115px;
+    background: transparent url(../images/avatar.png) no-repeat 0 0;
+}
+.avatar:hover {
+    z-index: 9999;
+}
+.avatar img {
+    position: absolute;
+    left: 20px;
+    bottom: 19px;
 }

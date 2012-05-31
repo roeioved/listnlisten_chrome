@@ -7,7 +7,6 @@
     "background": {
         "scripts": [
             "resources/jquery-1.7.1.min.js",
-            "resources/underscore.min.js",
             "resources/playlist.js",
             "resources/background.js"
         ]
@@ -32,6 +31,7 @@
         "default_title": "List {n} Listen"
     },
     "permissions": [
-        "tabs"
+        "tabs",
+        "*.facebook.com/*"
     ]
 }
